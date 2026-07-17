@@ -42,9 +42,10 @@ git add -A && git commit -m "description" && git push
 - `apps/mobile/` — Flet mobile (skeleton)
 - `tests/` — 860 tests (37 unit + 4 integration)
 
-## Available Skills (24)
+## Available Skills (39)
 
-All skills are in `.opencode/skills/` and apply to ALL agents in this project.
+All skills are in `~/.config/opencode/skills/` (global) and `.opencode/skills/` (project).
+Skills are inherited by ALL agents in ALL projects automatically.
 
 ### Core Development
 | Skill | Purpose |
