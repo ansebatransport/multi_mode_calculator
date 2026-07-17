@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="calculator" id="calculator">
+        <div class="title-bar">
+            <div class="title-left">
+                <svg class="calc-icon" viewBox="0 0 24 24" width="16" height="16" fill="#60cdff">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7.5 3.5h2v2h-2v-2zm0 4h2v2h-2v-2zm-4-4h2v2H7.5v-2zm0 4h2v2H7.5v-2zm-1 6h11v-1H6.5v1zm10-6h2v2h-2v-2zm0 4h2v2h-2v-2zm0-8h2v2h-2v-2z"/>
+                </svg>
+                <span class="title-text">Calculator</span>
+            </div>
+            <div class="title-controls">
+                <button class="title-btn" id="btn-minimize" title="Minimize">
+                    <svg width="10" height="10" viewBox="0 0 10 10"><line x1="1" y1="5" x2="9" y2="5" stroke="white" stroke-width="1"/></svg>
+                </button>
+                <button class="title-btn" id="btn-maximize" title="Maximize">
+                    <svg width="10" height="10" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none" stroke="white" stroke-width="1"/></svg>
+                </button>
+                <button class="title-btn close-btn" id="btn-close" title="Close">
+                    <svg width="10" height="10" viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9" stroke="white" stroke-width="1"/><line x1="9" y1="1" x2="1" y2="9" stroke="white" stroke-width="1"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <button class="hamburger-btn" id="hamburger-btn" title="Menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#ccc">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                </svg>
+            </button>
+            <span class="mode-label" id="mode-label">Standard</span>
+            <div class="nav-right">
+                <button class="nav-icon-btn" id="btn-history" title="History">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#aaa"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                </button>
+                <button class="nav-icon-btn" id="btn-theme" title="Toggle theme">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#aaa" id="theme-icon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="hamburger-menu" id="hamburger-menu">
+            <div class="menu-item active" data-mode="standard">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3.5c1.93 0 3.5 1.57 3.5 3.5S13.93 13.5 12 13.5 8.5 11.93 8.5 10 10.07 6.5 12 6.5z"/></svg>
+                <span>Standard</span>
+            </div>
+            <div class="menu-item" data-mode="scientific">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v2h1v14a4 4 0 0 0 8 0V4h1V2H7zm4 16c-1.1 0-2-.9-2-2V8h4v8c0 1.1-.9 2-2 2z"/></svg>
+                <span>Scientific</span>
+            </div>
+            <div class="menu-item" data-mode="programmer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                <span>Programmer</span>
+            </div>
+            <div class="menu-item" data-mode="graph">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                <span>Graph</span>
+            </div>
+            <div class="menu-item" data-mode="converter">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/></svg>
+                <span>Unit Converter</span>
+            </div>
+            <div class="menu-item" data-mode="financial">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                <span>Financial</span>
+            </div>
+        </div>
+
+        <div class="mode-content" id="mode-content">
+            <!-- STANDARD MODE -->
+            <div class="page active" id="page-standard">
+                <div class="display">
+                    <div class="expression" id="std-expression"></div>
+                    <div class="result" id="std-result">0</div>
+                </div>
+                <div class="buttons-grid">
+                    <button class="btn func" data-action="percent">%</button>
+                    <button class="btn func" data-action="ce">CE</button>
+                    <button class="btn func" data-action="clear">C</button>
+                    <button class="btn func" data-action="backspace">⌫</button>
+                    <button class="btn func" data-action="reciprocal">1/x</button>
+                    <button class="btn func" data-action="square">x²</button>
+                    <button class="btn func" data-action="sqrt">√</button>
+                    <button class="btn op" data-value="/">÷</button>
+                    <button class="btn num" data-value="7">7</button>
+                    <button class="btn num" data-value="8">8</button>
+                    <button class="btn num" data-value="9">9</button>
+                    <button class="btn op" data-value="*">×</button>
+                    <button class="btn num" data-value="4">4</button>
+                    <button class="btn num" data-value="5">5</button>
+                    <button class="btn num" data-value="6">6</button>
+                    <button class="btn op" data-value="-">−</button>
+                    <button class="btn num" data-value="1">1</button>
+                    <button class="btn num" data-value="2">2</button>
+                    <button class="btn num" data-value="3">3</button>
+                    <button class="btn op" data-value="+">+</button>
+                    <button class="btn func" data-action="negate">±</button>
+                    <button class="btn num" data-value="0">0</button>
+                    <button class="btn num" data-value=".">.</button>
+                    <button class="btn equals" data-action="calculate">=</button>
+                </div>
+            </div>
+
+            <!-- SCIENTIFIC MODE -->
+            <div class="page" id="page-scientific">
+                <div class="display">
+                    <div class="angle-mode" id="angle-mode">DEG</div>
+                    <div class="expression" id="sci-expression"></div>
+                    <div class="result" id="sci-result">0</div>
+                </div>
+                <div class="buttons-grid sci-grid">
+                    <button class="btn sci" data-action="angle-toggle">DEG</button>
+                    <button class="btn sci" data-value="(">(</button>
+                    <button class="btn sci" data-value=")">)</button>
+                    <button class="btn sci" data-action="factorial">n!</button>
+                    <button class="btn sci" data-action="clear">C</button>
+                    <button class="btn sci" data-action="backspace">⌫</button>
+                    <button class="btn sci" data-action="sin">sin</button>
+                    <button class="btn sci" data-action="cos">cos</button>
+                    <button class="btn sci" data-action="tan">tan</button>
+                    <button class="btn sci" data-action="pi">π</button>
+                    <button class="btn sci" data-action="euler">e</button>
+                    <button class="btn sci" data-action="mod">mod</button>
+                    <button class="btn sci" data-action="asin">sin⁻¹</button>
+                    <button class="btn sci" data-action="acos">cos⁻¹</button>
+                    <button class="btn sci" data-action="atan">tan⁻¹</button>
+                    <button class="btn sci" data-action="square">x²</button>
+                    <button class="btn sci" data-action="power">xʸ</button>
+                    <button class="btn sci" data-action="sqrt">√</button>
+                    <button class="btn sci" data-action="sinh">sinh</button>
+                    <button class="btn sci" data-action="cosh">cosh</button>
+                    <button class="btn sci" data-action="tanh">tanh</button>
+                    <button class="btn sci" data-action="ln">ln</button>
+                    <button class="btn sci" data-action="log10">log</button>
+                    <button class="btn sci" data-action="reciprocal">1/x</button>
+                    <button class="btn sci" data-action="asinh">sinh⁻¹</button>
+                    <button class="btn sci" data-action="acosh">cosh⁻¹</button>
+                    <button class="btn sci" data-action="atanh">tanh⁻¹</button>
+                    <button class="btn sci" data-action="cbrt">³√</button>
+                    <button class="btn sci" data-action="pow10">10ˣ</button>
+                    <button class="btn sci" data-action="expx">eˣ</button>
+                    <button class="btn num" data-value="7">7</button>
+                    <button class="btn num" data-value="8">8</button>
+                    <button class="btn num" data-value="9">9</button>
+                    <button class="btn op" data-value="/">÷</button>
+                    <button class="btn func" data-action="percent">%</button>
+                    <button class="btn num" data-value="4">4</button>
+                    <button class="btn num" data-value="5">5</button>
+                    <button class="btn num" data-value="6">6</button>
+                    <button class="btn op" data-value="*">×</button>
+                    <button class="btn func" data-action="negate">±</button>
+                    <button class="btn num" data-value="1">1</button>
+                    <button class="btn num" data-value="2">2</button>
+                    <button class="btn num" data-value="3">3</button>
+                    <button class="btn op" data-value="-">−</button>
+                    <button class="btn num" data-value="0">0</button>
+                    <button class="btn num" data-value=".">.</button>
+                    <button class="btn num" data-value="**">^</button>
+                    <button class="btn op" data-value="+">+</button>
+                    <button class="btn equals" data-action="calculate">=</button>
+                </div>
+            </div>
+
+            <!-- PROGRAMMER MODE -->
+            <div class="page" id="page-programmer">
+                <div class="display prog-display">
+                    <div class="result" id="prog-result">0</div>
+                    <div class="base-displays">
+                        <div class="base-row"><span class="base-label">HEX</span><span class="base-val" id="prog-hex"></span></div>
+                        <div class="base-row"><span class="base-label">DEC</span><span class="base-val" id="prog-dec"></span></div>
+                        <div class="base-row"><span class="base-label">OCT</span><span class="base-val" id="prog-oct"></span></div>
+                        <div class="base-row"><span class="base-label">BIN</span><span class="base-val" id="prog-bin"></span></div>
+                    </div>
+                </div>
+                <div class="buttons-grid prog-grid">
+                    <button class="btn base-btn active" data-base="16">HEX</button>
+                    <button class="btn base-btn" data-base="10">DEC</button>
+                    <button class="btn base-btn" data-base="8">OCT</button>
+                    <button class="btn base-btn" data-base="2">BIN</button>
+                    <button class="btn func" data-action="clear">C</button>
+                    <button class="btn func" data-action="backspace">⌫</button>
+                    <button class="btn op" data-action="lshift">«</button>
+                    <button class="btn op" data-action="rshift">»</button>
+                    <button class="btn op" data-action="bitnot">NOT</button>
+                    <button class="btn hex-btn disabled" data-value="A">A</button>
+                    <button class="btn num" data-value="7">7</button>
+                    <button class="btn num" data-value="8">8</button>
+                    <button class="btn num" data-value="9">9</button>
+                    <button class="btn op" data-action="bitand">AND</button>
+                    <button class="btn hex-btn disabled" data-value="B">B</button>
+                    <button class="btn num" data-value="4">4</button>
+                    <button class="btn num" data-value="5">5</button>
+                    <button class="btn num" data-value="6">6</button>
+                    <button class="btn op" data-action="bitor">OR</button>
+                    <button class="btn hex-btn disabled" data-value="C">C</button>
+                    <button class="btn num" data-value="1">1</button>
+                    <button class="btn num" data-value="2">2</button>
+                    <button class="btn num" data-value="3">3</button>
+                    <button class="btn op" data-action="bitxor">XOR</button>
+                    <button class="btn hex-btn disabled" data-value="D">D</button>
+                    <button class="btn hex-btn disabled" data-value="E">E</button>
+                    <button class="btn hex-btn disabled" data-value="F">F</button>
+                    <button class="btn func" data-action="negate">±</button>
+                    <button class="btn equals" data-action="prog-equals">=</button>
+                    <button class="btn num" data-value="0">0</button>
+                    <button class="btn op" data-value="+">+</button>
+                    <button class="btn op" data-value="-">−</button>
+                    <button class="btn op" data-value="*">×</button>
+                </div>
+            </div>
+
+            <!-- GRAPH MODE -->
+            <div class="page" id="page-graph">
+                <div class="display graph-display">
+                    <div class="graph-input-row">
+                        <span class="fx-label">f(x) =</span>
+                        <input type="text" id="graph-input" class="graph-input" placeholder="e.g. sin(x), x^2, log(x)" value="sin(x)">
+                    </div>
+                    <canvas id="graph-canvas" width="380" height="240"></canvas>
+                </div>
+                <div class="graph-controls">
+                    <div class="graph-range">
+                        <label>X min <input type="number" id="x-min" value="-10"></label>
+                        <label>X max <input type="number" id="x-max" value="10"></label>
+                        <label>Y min <input type="number" id="y-min" value="-10"></label>
+                        <label>Y max <input type="number" id="y-max" value="10"></label>
+                    </div>
+                    <button class="btn equals graph-plot-btn" id="plot-btn">Plot</button>
+                    <div class="presets">
+                        <button class="btn sci preset-btn" data-fn="sin(x)">sin(x)</button>
+                        <button class="btn sci preset-btn" data-fn="cos(x)">cos(x)</button>
+                        <button class="btn sci preset-btn" data-fn="x**2">x²</button>
+                        <button class="btn sci preset-btn" data-fn="x**3">x³</button>
+                        <button class="btn sci preset-btn" data-fn="sqrt(x)">√x</button>
+                        <button class="btn sci preset-btn" data-fn="log(x)">log(x)</button>
+                        <button class="btn sci preset-btn" data-fn="1/x">1/x</button>
+                        <button class="btn sci preset-btn" data-fn="abs(x)">|x|</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT CONVERTER MODE -->
+            <div class="page" id="page-converter">
+                <div class="converter-panel">
+                    <div class="converter-category">
+                        <label>Category</label>
+                        <select id="conv-category"></select>
+                    </div>
+                    <div class="converter-swap">
+                        <div class="converter-field">
+                            <label>From</label>
+                            <select id="conv-from"></select>
+                            <input type="number" id="conv-from-val" value="1" class="conv-input">
+                        </div>
+                        <button class="btn func swap-btn" id="conv-swap">⇄</button>
+                        <div class="converter-field">
+                            <label>To</label>
+                            <select id="conv-to"></select>
+                            <input type="text" id="conv-to-val" class="conv-input" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINANCIAL MODE -->
+            <div class="page" id="page-financial">
+                <div class="fin-tabs">
+                    <button class="fin-tab active" data-tab="tvm">TVM</button>
+                    <button class="fin-tab" data-tab="mortgage">Loans</button>
+                    <button class="fin-tab" data-tab="npv-irr">NPV/IRR</button>
+                    <button class="fin-tab" data-tab="depreciation">Depr.</button>
+                    <button class="fin-tab" data-tab="bond">Bond</button>
+                    <button class="fin-tab" data-tab="business">Business</button>
+                </div>
+
+                <!-- TVM -->
+                <div class="fin-panel active" id="fin-tvm">
+                    <div class="fin-hint">Leave one field empty to solve for it</div>
+                    <div class="fin-field"><label>N (periods)</label><input type="number" id="tvm-n" step="any"></div>
+                    <div class="fin-field"><label>I/Y (rate %)</label><input type="number" id="tvm-i" step="any"></div>
+                    <div class="fin-field"><label>PV (present value)</label><input type="number" id="tvm-pv" step="any"></div>
+                    <div class="fin-field"><label>PMT (payment)</label><input type="number" id="tvm-pmt" step="any"></div>
+                    <div class="fin-field"><label>FV (future value)</label><input type="number" id="tvm-fv" step="any"></div>
+                    <button class="btn equals" id="tvm-solve">Solve</button>
+                    <div class="fin-result" id="tvm-result"></div>
+                </div>
+
+                <!-- LOANS -->
+                <div class="fin-panel" id="fin-mortgage">
+                    <div class="fin-sub-tabs">
+                        <button class="fin-sub-tab active" data-stab="mortgage">Mortgage</button>
+                        <button class="fin-sub-tab" data-stab="car-loan">Car Loan</button>
+                        <button class="fin-sub-tab" data-stab="interest">Interest</button>
+                    </div>
+                    <div class="fin-sub-panel active" id="stab-mortgage">
+                        <div class="fin-field"><label>Loan Amount ($)</label><input type="number" id="mort-principal" value="250000"></div>
+                        <div class="fin-field"><label>Annual Rate (%)</label><input type="number" id="mort-rate" step="any" value="6.5"></div>
+                        <div class="fin-field"><label>Years</label><input type="number" id="mort-years" value="30"></div>
+                        <button class="btn equals" id="mort-calc">Calculate</button>
+                        <div class="fin-result" id="mort-result"></div>
+                    </div>
+                    <div class="fin-sub-panel" id="stab-car-loan">
+                        <div class="fin-field"><label>Vehicle Price ($)</label><input type="number" id="car-principal" value="35000"></div>
+                        <div class="fin-field"><label>Annual Rate (%)</label><input type="number" id="car-rate" step="any" value="5.9"></div>
+                        <div class="fin-field"><label>Term (months)</label><input type="number" id="car-months" value="60"></div>
+                        <button class="btn equals" id="car-calc">Calculate</button>
+                        <div class="fin-result" id="car-result"></div>
+                    </div>
+                    <div class="fin-sub-panel" id="stab-interest">
+                        <div class="fin-field"><label>Principal ($)</label><input type="number" id="int-principal" value="10000"></div>
+                        <div class="fin-field"><label>Annual Rate (%)</label><input type="number" id="int-rate" step="any" value="5"></div>
+                        <div class="fin-field"><label>Time (years)</label><input type="number" id="int-time" step="any" value="3"></div>
+                        <div class="fin-field"><label>Type</label>
+                            <select id="int-type"><option value="compound">Compound</option><option value="simple">Simple</option></select>
+                        </div>
+                        <div class="fin-field" id="int-periods-field"><label>Compounds/Year</label><input type="number" id="int-periods" value="12"></div>
+                        <button class="btn equals" id="int-calc">Calculate</button>
+                        <div class="fin-result" id="int-result"></div>
+                    </div>
+                </div>
+
+                <!-- NPV/IRR -->
+                <div class="fin-panel" id="fin-npv-irr">
+                    <div class="fin-field"><label>Discount Rate (%)</label><input type="number" id="npv-rate" step="any" value="10"></div>
+                    <div class="fin-field"><label>Cash Flows (comma-separated, start with initial investment e.g. -1000)</label><input type="text" id="npv-cashflows" value="-1000,300,400,500,600"></div>
+                    <div class="fin-btns">
+                        <button class="btn equals" id="npv-calc">NPV</button>
+                        <button class="btn equals" id="irr-calc">IRR</button>
+                    </div>
+                    <div class="fin-field" style="margin-top:8px"><label>Finance Rate (%)</label><input type="number" id="mirr-finance" step="any" value="5"></div>
+                    <div class="fin-field"><label>Reinvest Rate (%)</label><input type="number" id="mirr-reinvest" step="any" value="8"></div>
+                    <button class="btn equals" id="mirr-calc">MIRR</button>
+                    <div class="fin-result" id="npv-result"></div>
+                </div>
+
+                <!-- DEPRECIATION -->
+                <div class="fin-panel" id="fin-depreciation">
+                    <div class="fin-field"><label>Asset Cost ($)</label><input type="number" id="dep-cost" value="50000"></div>
+                    <div class="fin-field"><label>Salvage Value ($)</label><input type="number" id="dep-salvage" value="5000"></div>
+                    <div class="fin-field"><label>Useful Life (years)</label><input type="number" id="dep-life" value="10"></div>
+                    <div class="fin-field"><label>Method</label>
+                        <select id="dep-method">
+                            <option value="straight_line">Straight Line</option>
+                            <option value="declining_balance">Double Declining Balance</option>
+                            <option value="sum_of_years">Sum of Years Digits</option>
+                        </select>
+                    </div>
+                    <button class="btn equals" id="dep-calc">Calculate</button>
+                    <div class="fin-result fin-result-table" id="dep-result"></div>
+                </div>
+
+                <!-- BOND -->
+                <div class="fin-panel" id="fin-bond">
+                    <div class="fin-field"><label>Face Value ($)</label><input type="number" id="bond-face" value="1000"></div>
+                    <div class="fin-field"><label>Coupon Rate (%)</label><input type="number" id="bond-coupon" step="any" value="5"></div>
+                    <div class="fin-field"><label>Yield to Maturity (%)</label><input type="number" id="bond-ytm" step="any" value="6"></div>
+                    <div class="fin-field"><label>Years to Maturity</label><input type="number" id="bond-years" value="10"></div>
+                    <div class="fin-field"><label>Payments/Year</label><input type="number" id="bond-freq" value="2"></div>
+                    <button class="btn equals" id="bond-calc">Calculate Price</button>
+                    <div class="fin-result" id="bond-result"></div>
+                </div>
+
+                <!-- BUSINESS -->
+                <div class="fin-panel" id="fin-business">
+                    <div class="fin-sub-tabs">
+                        <button class="fin-sub-tab active" data-stab="breakeven">Break-Even</button>
+                        <button class="fin-sub-tab" data-stab="roi">ROI</button>
+                        <button class="fin-sub-tab" data-stab="margin">Margin</button>
+                    </div>
+                    <div class="fin-sub-panel active" id="stab-breakeven">
+                        <div class="fin-field"><label>Fixed Costs ($)</label><input type="number" id="be-fixed" value="50000"></div>
+                        <div class="fin-field"><label>Price per Unit ($)</label><input type="number" id="be-price" step="any" value="25"></div>
+                        <div class="fin-field"><label>Variable Cost per Unit ($)</label><input type="number" id="be-variable" step="any" value="10"></div>
+                        <button class="btn equals" id="be-calc">Calculate</button>
+                        <div class="fin-result" id="be-result"></div>
+                    </div>
+                    <div class="fin-sub-panel" id="stab-roi">
+                        <div class="fin-field"><label>Investment ($)</label><input type="number" id="roi-invest" value="10000"></div>
+                        <div class="fin-field"><label>Return Value ($)</label><input type="number" id="roi-return" value="15000"></div>
+                        <div class="fin-field"><label>Time (years)</label><input type="number" id="roi-years" step="any" value="3"></div>
+                        <button class="btn equals" id="roi-calc">Calculate</button>
+                        <div class="fin-result" id="roi-result"></div>
+                    </div>
+                    <div class="fin-sub-panel" id="stab-margin">
+                        <div class="fin-field"><label>Revenue ($)</label><input type="number" id="margin-revenue" value="100000"></div>
+                        <div class="fin-field"><label>Cost of Goods ($)</label><input type="number" id="margin-cost" value="60000"></div>
+                        <button class="btn equals" id="margin-calc">Calculate</button>
+                        <div class="fin-result" id="margin-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-panel" id="history-panel">
+            <div class="history-header">
+                <span>History</span>
+                <button class="btn func" id="history-close">✕</button>
+            </div>
+            <div class="history-list" id="history-list">
+                <div class="history-empty">No history yet</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
