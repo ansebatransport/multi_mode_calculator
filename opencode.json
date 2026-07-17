@@ -3,5 +3,20 @@
   "skills": {
     "paths": [".opencode/skills"]
   },
-  "instructions": ["AGENTS.md"]
+  "instructions": ["AGENTS.md"],
+  "lsp": {
+    "python": {
+      "command": "pylsp",
+      "args": [],
+      "extensions": ["*.py"],
+      "settings": {
+        "pylsp.plugins.jedi.auto_import": true,
+        "pylsp.plugins.jedi_completion.enabled": true,
+        "pylsp.plugins.flake8.enabled": true,
+        "pylsp.plugins.pycodestyle.enabled": true,
+        "pylsp.plugins.pyflakes.enabled": true,
+        "pylsp.plugins.pylint.enabled": false
+      }
+    }
+  }
 }
