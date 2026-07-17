@@ -18,5 +18,23 @@
         "pylsp.plugins.pylint.enabled": false
       }
     }
+  },
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "description": "Primary agent for building, editing, and debugging code. Inherits all 24 skills and tools."
+    },
+    "plan": {
+      "mode": "subagent",
+      "description": "Planning agent for architecture and design decisions. Inherits all skills."
+    },
+    "general": {
+      "mode": "subagent",
+      "description": "General-purpose agent for research, analysis, and complex tasks. Inherits all skills."
+    },
+    "explore": {
+      "mode": "subagent",
+      "description": "Codebase exploration agent. Inherits all skills for searching and understanding code."
+    }
   }
 }

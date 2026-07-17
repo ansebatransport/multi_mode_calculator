@@ -42,9 +42,80 @@ git add -A && git commit -m "description" && git push
 - `apps/mobile/` — Flet mobile (skeleton)
 - `tests/` — 860 tests (37 unit + 4 integration)
 
-## Notes
+## Available Skills (24)
+
+All skills are in `.opencode/skills/` and apply to ALL agents in this project.
+
+### Core Development
+| Skill | Purpose |
+|-------|---------|
+| vision | Analyze screenshots, UI designs |
+| testing | Run tests, fix failures, write tests |
+| git-workflow | Commits, PRs, branches |
+| security | XSS, injection, sanitization |
+| type-safety | Type hints, mypy/pylsp |
+| docs | README, ARCHITECTURE, docstrings |
+| performance | Profiling, caching, benchmarks |
+| sdks | Python/JS/CLI client libraries |
+
+### Autonomous Agent
+| Skill | Purpose |
+|-------|---------|
+| error-recovery | Retry, fallback, circuit breaker |
+| refactoring | Code smells, DRY, SOLID |
+| debugging | Root cause analysis, breakpoints |
+| code-review | PR review, style checks |
+| cicd | GitHub Actions, pipelines |
+| configuration | Env vars, feature flags |
+| accessibility | WCAG, ARIA, keyboard nav |
+| dependency-management | Updates, security patches |
+
+### Compiled Languages
+| Skill | Purpose |
+|-------|---------|
+| c-lang | gcc, Makefile, memory, valgrind |
+| cpp | CMake, RAII, templates, STL |
+| rust | Cargo, ownership, traits, clippy |
+| csharp | .NET, LINQ, async, DI, xUnit |
+
+### Automation
+| Skill | Purpose |
+|-------|---------|
+| http-client | curl, API testing, batch scripts |
+| database | SQLite, schemas, migrations, SQL |
+| file-manager | Bulk rename, organize, cleanup |
+| process-monitor | Background processes, auto-restart |
+
+## Available Tools
+
+| Tool | Purpose |
+|------|---------|
+| bash | Shell commands, git, docker, curl |
+| edit | Edit files with string replacements |
+| write | Create/overwrite files |
+| read | Read files and directories |
+| glob | Find files by pattern |
+| grep | Search file contents |
+| webfetch | Fetch web content |
+| websearch | Search the web |
+| task | Launch subagents |
+| todowrite | Task tracking |
+| question | Ask user questions |
+| skill | Load specialized skills |
+
+## How to Use Skills
+
+Skills auto-trigger on keyword matches. To manually load:
+```
+/skill testing
+/skill http-client
+/skill database
+```
+
+## Environment Notes
 
 - Running in WSL2, no sudo access
 - Desktop Flet mode requires libgtk-3.so.0 (not available in WSL2)
 - Web mode on port 5000 is the primary working mode
 - User prefers to focus on web app first
+- All skills and tools are inherited by all agents in this project
